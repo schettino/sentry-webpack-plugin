@@ -3,7 +3,7 @@
   "description": "Official webpack plugin for Sentry",
   "keywords": ["sentry", "sentry-cli", "webpack", "source-map"],
   "author": "Sentry",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "license": "MIT",
   "repository": "git@github.com:schettino/sentry-webpack-plugin.git",
   "homepage": "https://github.com/schettino/sentry-webpack-plugin",
