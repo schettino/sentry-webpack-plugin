@@ -248,21 +248,35 @@ class SentryCliPlugin {
     }
   }
 
+  extractLoaders(compilerOptions) {
+    const loaders = sillyClone(
+      compilerOptions.module.loaders || compilerOptions.module.rules
+    );
+    return loaders.reduce((acc, item) => {
+      if (item.loader) {
+        return acc.concat(item.loader);
+      }
+      if (Array.isArray(item.use)) {
+        return acc.concat(item.use.map(x => x.loader || x));
+      }
+      if (item.use.loader) {
+        return acc.concat(item.use.loader);
+      }
+      return acc;
+    }, []);
+  }
+
   /** injectRelease with printable debug info */
   injectReleaseWithDebug(compilerOptions) {
     const input = {
-      loaders: sillyClone(
-        compilerOptions.module.loaders || compilerOptions.module.rules
-      ).map(x => x.loader || x.use[0].loader),
+      loaders: this.extractLoaders(compilerOptions),
       entry: sillyClone(compilerOptions.entry),
     };
 
     this.injectRelease(compilerOptions);
 
     const output = {
-      loaders: sillyClone(
-        compilerOptions.module.loaders || compilerOptions.module.rules
-      ).map(x => x.loader || x.use[0].loader),
+      loaders: this.extractLoaders(compilerOptions),
       entry: sillyClone(compilerOptions.entry),
     };
 
