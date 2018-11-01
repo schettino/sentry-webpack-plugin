@@ -1,5 +1,5 @@
 {
-  "name": "schettino-webpack-plugin",
+  "name": "schettino-sentry-webpack-plugin",
   "description": "Official webpack plugin for Sentry",
   "keywords": ["sentry", "sentry-cli", "webpack", "source-map"],
   "author": "Sentry",
